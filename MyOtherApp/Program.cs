@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using SharedLib;
 
-namespace MyMvcApp
+namespace MyOtherApp
 {
     public class Program
     {
-        public static string Test = "pass";
-
         public static void Main(string[] args)
         {
             Console.WriteLine(SharedLib.Class1.Message);
-            
+
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())

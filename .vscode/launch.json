@@ -2,15 +2,27 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "ASP .NET Core launch",
+            "name": "MyMvcApp launch",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "dotnet build",
+            "preLaunchTask": "dotnet build MyMvcApp",
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
             "cwd": "${workspaceRoot}/MyMvcApp",
             "program": "${workspaceRoot}/MyMvcApp/bin/Debug/netcoreapp1.1/MyMvcApp.dll",
+            "args": []
+        },
+        {
+            "name": "MyOtherApp launch",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "dotnet build MyOtherApp",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "cwd": "${workspaceRoot}/MyOtherApp",
+            "program": "${workspaceRoot}/MyOtherApp/bin/Debug/netcoreapp1.1/MyOtherApp.dll",
             "args": []
         }
     ]

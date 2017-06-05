@@ -8,15 +8,18 @@
             "args": [ "restore" ]
         },
         {
-            "taskName": "dotnet build",
+            "taskName": "dotnet build MyMvcApp",
             "dependsOn": "dotnet restore",
+            "options": {
+                "cwd": "${workspaceRoot}/MyMvcApp"
+            },
             "command": "dotnet",
             "suppressTaskName": true,
             "args": [ "build" ]
         },
         {
             "taskName": "dotnet watch run MyMvcApp",
-            "dependsOn": "dotnet build",
+            "dependsOn": "dotnet build MyMvcApp",
             "options": {
                 "env": {
                     "ASPNETCORE_ENVIRONMENT": "Development"
@@ -29,7 +32,7 @@
         },
         {
             "taskName": "dotnet run MyMvcApp",
-            "dependsOn": "dotnet build",
+            "dependsOn": "dotnet build MyMvcApp",
             "options": {
                 "env": {
                     "ASPNETCORE_ENVIRONMENT": "Development"
@@ -59,6 +62,42 @@
             "command": "dotnet",
             "suppressTaskName": true,
             "args": [ "test" ]
+        },
+        {
+            "taskName": "dotnet build MyOtherApp",
+            "dependsOn": "dotnet restore",
+            "options": {
+                "cwd": "${workspaceRoot}/MyOtherApp"
+            },
+            "command": "dotnet",
+            "suppressTaskName": true,
+            "args": [ "build" ]
+        },
+        {
+            "taskName": "dotnet watch run MyOtherApp",
+            "dependsOn": "dotnet build MyOtherApp",
+            "options": {
+                "env": {
+                    "ASPNETCORE_ENVIRONMENT": "Development"
+                },
+                "cwd": "${workspaceRoot}/MyOtherApp"
+            },
+            "command": "dotnet",
+            "suppressTaskName": true,
+            "args": [ "watch", "run" ]
+        },
+        {
+            "taskName": "dotnet run MyOtherApp",
+            "dependsOn": "dotnet build MyOtherApp",
+            "options": {
+                "env": {
+                    "ASPNETCORE_ENVIRONMENT": "Development"
+                },
+                "cwd": "${workspaceRoot}/MyOtherApp"
+            },
+            "command": "dotnet",
+            "suppressTaskName": true,
+            "args": [ "run" ]
         }
     ]
 }
