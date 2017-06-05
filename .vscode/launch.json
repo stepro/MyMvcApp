@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "ASP .NET Core launch",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "dotnet build",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "cwd": "${workspaceRoot}/MyMvcApp",
+            "program": "${workspaceRoot}/MyMvcApp/bin/Debug/netcoreapp1.1/MyMvcApp.dll",
+            "args": []
+        }
+    ]
+}
