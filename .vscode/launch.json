@@ -24,6 +24,25 @@
             "cwd": "${workspaceRoot}/MyOtherApp",
             "program": "${workspaceRoot}/MyOtherApp/bin/Debug/netcoreapp1.1/MyOtherApp.dll",
             "args": []
+        },
+        {
+            "name": "MyMvcApp launch (Docker)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "docker build MyMvcApp",
+            "pipeTransport": {
+                "pipeProgram": "docker-compose",
+                "pipeCwd": "${workspaceRoot}",
+                "pipeArgs": [ "run", "--service-ports", "--rm", "my-mvc-app" ],
+                "quoteArgs": false,
+                "debuggerPath": "/vsdbg/vsdbg"
+            },
+            "cwd": "/src/MyMvcApp",
+            "program": "/src/MyMvcApp/bin/Debug/netcoreapp1.1/MyMvcApp.dll",
+            "args": [],
+            "sourceFileMap": {
+                "/src": "${workspaceRoot}"
+            }
         }
     ]
 }

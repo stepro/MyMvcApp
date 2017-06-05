@@ -12,6 +12,25 @@
             "cwd": "${workspaceRoot}",
             "program": "${workspaceRoot}/bin/Debug/netcoreapp1.1/MyMvcApp.dll",
             "args": []
+        },
+        {
+            "name": "ASP .NET Core launch (Docker)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "docker build",
+            "pipeTransport": {
+                "pipeProgram": "docker-compose",
+                "pipeCwd": "${workspaceRoot}",
+                "pipeArgs": [ "run", "--service-ports", "--rm", "my-mvc-app" ],
+                "quoteArgs": false,
+                "debuggerPath": "/vsdbg/vsdbg"
+            },
+            "cwd": "/src",
+            "program": "/src/bin/Debug/netcoreapp1.1/MyMvcApp.dll",
+            "args": [],
+            "sourceFileMap": {
+                "/src": "${workspaceRoot}"
+            }
         }
     ]
 }

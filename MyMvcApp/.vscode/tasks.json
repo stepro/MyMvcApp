@@ -37,6 +37,42 @@
             "command": "dotnet",
             "suppressTaskName": true,
             "args": [ "run" ]
+        },
+        {
+            "taskName": "docker init",
+            "command": "docker-compose",
+            "suppressTaskName": true,
+            "args": [ "-f", "docker-init.yml", "up" ]
+        },
+        // This should call docker-compose build (docker/compose issue #4790)
+        {
+            "taskName": "docker build",
+            "dependsOn": "docker down",
+            "command": "docker",
+            "suppressTaskName": true,
+            "args": [ "build", "--target", "develop", "-t", "my-mvc-app:develop", "." ]
+        },
+        {
+            "taskName": "docker run dotnet watch run",
+            "dependsOn": "docker build",
+            "command": "docker-compose",
+            "suppressTaskName": true,
+            "args": [ "run", "--service-ports", "--rm", "my-mvc-app", "dotnet", "watch", "run" ],
+            "isBackground": true
+        },
+        {
+            "taskName": "docker run",
+            "dependsOn": "docker build",
+            "command": "docker-compose",
+            "suppressTaskName": true,
+            "args": [ "run", "--service-ports", "--rm", "my-mvc-app" ],
+            "isBackground": true
+        },
+        {
+            "taskName": "docker down",
+            "command": "docker-compose",
+            "suppressTaskName": true,
+            "args": [ "down" ]
         }
     ]
 }

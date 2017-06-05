@@ -1,0 +1,8 @@
+.dockerignore
+.vscode
+bin
+docker-compose.yml
+docker-compose.*.yml
+docker-init.yml
+Dockerfile
+obj

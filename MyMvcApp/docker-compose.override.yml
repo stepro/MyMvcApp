@@ -1,0 +1,24 @@
+version: "2"
+volumes:
+  dcsync:
+    external:
+      name: mymvcapp_dcsync
+  vsdbg:
+    external:
+      name: mymvcapp_vsdbg
+services:
+  my-mvc-app:
+    # Depends on docker/compose issue #4790
+    # build:
+    #   target: develop
+    image: my-mvc-app:develop
+    volumes:
+    - dcsync:/dcsync:ro
+    - vsdbg:/vsdbg:ro
+    - .:/.src
+    ports:
+    - "5000:80"
+    environment:
+      DCSYNC_TARGET: /src
+    entrypoint: /dcsync/exec
+    command: dotnet run
