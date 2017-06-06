@@ -1,0 +1,8 @@
+FROM microsoft/aspnetcore-build
+COPY --from=stephpr/dcsync /dcsync /dcsync
+COPY --from=stephpr/vsdbg:15.1.10502.1 /vsdbg /vsdbg
+ENV DCSYNC_TARGET=/src
+WORKDIR /src
+COPY . .
+RUN dotnet restore
+ENTRYPOINT [ "/dcsync/exec" ]

@@ -1,13 +1,7 @@
 version: "2"
-volumes:
-  dcsync:
-  vsdbg:
 services:
-  dcsync:
-    image: stephpr/dcsync
-    volumes:
-    - dcsync:/dcsync
-  vsdbg:
-    image: stephpr/vsdbg:15.1.10502.1
-    volumes:
-    - vsdbg:/vsdbg
+  develop:
+    build:
+      dockerfile: Dockerfile.develop
+      context: .
+    image: my-mvc-app:develop
