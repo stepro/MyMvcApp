@@ -35,3 +35,19 @@ services:
       DCSYNC_TARGET: /src
     entrypoint: /dcsync/exec
     command: dotnet test
+  my-other-app:
+    # Depends on docker/compose issue #4790
+    # build:
+    #   dockerfile: MyOtherApp.Dockerfile
+    #   target: develop
+    image: my-other-app:develop
+    volumes:
+    - dcsync:/dcsync:ro
+    - vsdbg:/vsdbg:ro
+    - .:/.src
+    ports:
+    - "5001:80"
+    environment:
+      DCSYNC_TARGET: /src
+    entrypoint: /dcsync/exec
+    command: dotnet run

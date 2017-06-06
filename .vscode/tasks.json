@@ -153,6 +153,30 @@
             "args": [ "run", "--rm", "my-mvc-app-tests" ],
             "isBackground": true
         },
+        // This should call docker-compose build (docker/compose issue #4790)
+        {
+            "taskName": "docker build MyOtherApp",
+            "dependsOn": "docker down",
+            "command": "docker",
+            "suppressTaskName": true,
+            "args": [ "build", "-f", "MyOtherApp.Dockerfile", "--target", "develop", "-t", "my-other-app:develop", "." ]
+        },
+        {
+            "taskName": "docker run dotnet watch run MyOtherApp",
+            "dependsOn": "docker build MyOtherApp",
+            "command": "docker-compose",
+            "suppressTaskName": true,
+            "args": [ "run", "--service-ports", "--rm", "my-other-app", "dotnet", "watch", "run" ],
+            "isBackground": true
+        },
+        {
+            "taskName": "docker run MyOtherApp",
+            "dependsOn": "docker build MyOtherApp",
+            "command": "docker-compose",
+            "suppressTaskName": true,
+            "args": [ "run", "--service-ports", "--rm", "my-other-app" ],
+            "isBackground": true
+        },
         {
             "taskName": "docker down",
             "command": "docker-compose",

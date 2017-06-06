@@ -3,12 +3,11 @@ WORKDIR /src
 COPY *.sln ./
 # Feature request: COPY glob pattern, maintain directory structure, e.g.
 # COPY --glob --recursive */*.*proj ./
-COPY MyMvcApp/*.csproj ./MyMvcApp/
-COPY MyMvcApp.Tests/*.csproj ./MyMvcApp.Tests/
+COPY MyOtherApp/*.csproj ./MyOtherApp/
 COPY SharedLib/*.csproj ./SharedLib/
 RUN dotnet restore
 COPY . .
-WORKDIR MyMvcApp
+WORKDIR MyOtherApp
 
 FROM base AS develop
 EXPOSE 80
@@ -23,4 +22,4 @@ FROM microsoft/aspnetcore AS production
 EXPOSE 80
 WORKDIR /app
 COPY --from=publish /app .
-CMD ["dotnet", "MyMvcApp.dll"]
+CMD ["dotnet", "MyOtherApp.dll"]

@@ -14,18 +14,6 @@
             "args": []
         },
         {
-            "name": "MyOtherApp launch",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "dotnet build MyOtherApp",
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            },
-            "cwd": "${workspaceRoot}/MyOtherApp",
-            "program": "${workspaceRoot}/MyOtherApp/bin/Debug/netcoreapp1.1/MyOtherApp.dll",
-            "args": []
-        },
-        {
             "name": "MyMvcApp launch (Docker)",
             "type": "coreclr",
             "request": "launch",
@@ -39,6 +27,37 @@
             },
             "cwd": "/src/MyMvcApp",
             "program": "/src/MyMvcApp/bin/Debug/netcoreapp1.1/MyMvcApp.dll",
+            "args": [],
+            "sourceFileMap": {
+                "/src": "${workspaceRoot}"
+            }
+        },
+        {
+            "name": "MyOtherApp launch",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "dotnet build MyOtherApp",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "cwd": "${workspaceRoot}/MyOtherApp",
+            "program": "${workspaceRoot}/MyOtherApp/bin/Debug/netcoreapp1.1/MyOtherApp.dll",
+            "args": []
+        },
+        {
+            "name": "MyOtherApp launch (Docker)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "docker build MyOtherApp",
+            "pipeTransport": {
+                "pipeProgram": "docker-compose",
+                "pipeCwd": "${workspaceRoot}",
+                "pipeArgs": [ "run", "--service-ports", "--rm", "my-other-app" ],
+                "quoteArgs": false,
+                "debuggerPath": "/vsdbg/vsdbg"
+            },
+            "cwd": "/src/MyOtherApp",
+            "program": "/src/MyOtherApp/bin/Debug/netcoreapp1.1/MyOtherApp.dll",
             "args": [],
             "sourceFileMap": {
                 "/src": "${workspaceRoot}"

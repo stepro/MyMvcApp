@@ -2,3 +2,5 @@ version: "2"
 services:
   my-mvc-app:
     image: my-mvc-app
+  my-other-app:
+    image: my-other-app
