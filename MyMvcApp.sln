@@ -11,6 +11,8 @@ Project("{13B669BE-BB05-4DDF-9536-439F39A36129}") = "MyOtherApp", "MyOtherApp\My
 EndProject
 Project("{13B669BE-BB05-4DDF-9536-439F39A36129}") = "SharedLib", "SharedLib\SharedLib.csproj", "{0D3DE4A5-4DC8-43A5-963F-68FE6935C9DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{C05029FD-26B0-4D34-9EF7-5D37C02931E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,5 +74,9 @@ Global
 		{0D3DE4A5-4DC8-43A5-963F-68FE6935C9DE}.Release|x64.Build.0 = Release|x64
 		{0D3DE4A5-4DC8-43A5-963F-68FE6935C9DE}.Release|x86.ActiveCfg = Release|x86
 		{0D3DE4A5-4DC8-43A5-963F-68FE6935C9DE}.Release|x86.Build.0 = Release|x86
+		{C05029FD-26B0-4D34-9EF7-5D37C02931E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C05029FD-26B0-4D34-9EF7-5D37C02931E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C05029FD-26B0-4D34-9EF7-5D37C02931E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C05029FD-26B0-4D34-9EF7-5D37C02931E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
