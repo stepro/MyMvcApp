@@ -6,6 +6,7 @@ bin
 docker-compose.yml
 docker-compose.*.yml
 docker-init.yml
+Dockerfile.develop
 *.Dockerfile
 obj
 */.dockerignore
@@ -14,5 +15,6 @@ obj
 */docker-compose.yml
 */docker-compose.*.yml
 */docker-init.yml
+*/Dockerfile.develop
 */Dockerfile
 */obj
