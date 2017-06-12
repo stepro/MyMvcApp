@@ -7,7 +7,8 @@
             "request": "launch",
             "preLaunchTask": "dotnet build MyMvcApp",
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://+:5000"
             },
             "cwd": "${workspaceRoot}/MyMvcApp",
             "program": "${workspaceRoot}/MyMvcApp/bin/Debug/netcoreapp1.1/MyMvcApp.dll",
@@ -19,7 +20,8 @@
             "request": "launch",
             "preLaunchTask": "dotnet build MyOtherApp",
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://+:5001"
             },
             "cwd": "${workspaceRoot}/MyOtherApp",
             "program": "${workspaceRoot}/MyOtherApp/bin/Debug/netcoreapp1.1/MyOtherApp.dll",

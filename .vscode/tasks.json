@@ -3,101 +3,62 @@
     "tasks": [
         {
             "taskName": "dotnet restore",
-            "command": "dotnet",
             "suppressTaskName": true,
+            "command": "dotnet",
             "args": [ "restore" ]
         },
         {
             "taskName": "dotnet build MyMvcApp",
-            "dependsOn": "dotnet restore",
+            "suppressTaskName": true,
             "options": {
                 "cwd": "${workspaceRoot}/MyMvcApp"
             },
             "command": "dotnet",
-            "suppressTaskName": true,
             "args": [ "build" ]
         },
         {
             "taskName": "dotnet watch run MyMvcApp",
-            "dependsOn": "dotnet build MyMvcApp",
+            "suppressTaskName": true,
             "options": {
                 "env": {
-                    "ASPNETCORE_ENVIRONMENT": "Development"
+                    "ASPNETCORE_ENVIRONMENT": "Development",
+                    "ASPNETCORE_URLS": "http://+:5000"
                 },
                 "cwd": "${workspaceRoot}/MyMvcApp"
             },
             "command": "dotnet",
-            "suppressTaskName": true,
             "args": [ "watch", "run" ]
         },
         {
-            "taskName": "dotnet run MyMvcApp",
-            "dependsOn": "dotnet build MyMvcApp",
-            "options": {
-                "env": {
-                    "ASPNETCORE_ENVIRONMENT": "Development"
-                },
-                "cwd": "${workspaceRoot}/MyMvcApp"
-            },
-            "command": "dotnet",
-            "suppressTaskName": true,
-            "args": [ "run" ]
-        },
-        {
             "taskName": "dotnet watch test MyMvcApp.Tests",
-            "dependsOn": "dotnet restore",
+            "suppressTaskName": true,
             "options": {
                 "cwd": "${workspaceRoot}/MyMvcApp.Tests"
             },
             "command": "dotnet",
-            "suppressTaskName": true,
             "args": [ "watch", "test" ]
         },
         {
-            "taskName": "dotnet test MyMvcApp.Tests",
-            "dependsOn": "dotnet restore",
-            "options": {
-                "cwd": "${workspaceRoot}/MyMvcApp.Tests"
-            },
-            "command": "dotnet",
-            "suppressTaskName": true,
-            "args": [ "test" ]
-        },
-        {
             "taskName": "dotnet build MyOtherApp",
-            "dependsOn": "dotnet restore",
+            "suppressTaskName": true,
             "options": {
                 "cwd": "${workspaceRoot}/MyOtherApp"
             },
             "command": "dotnet",
-            "suppressTaskName": true,
             "args": [ "build" ]
         },
         {
             "taskName": "dotnet watch run MyOtherApp",
-            "dependsOn": "dotnet build MyOtherApp",
+            "suppressTaskName": true,
             "options": {
                 "env": {
-                    "ASPNETCORE_ENVIRONMENT": "Development"
+                    "ASPNETCORE_ENVIRONMENT": "Development",
+                    "ASPNETCORE_URLS": "http://+:5001"
                 },
                 "cwd": "${workspaceRoot}/MyOtherApp"
             },
             "command": "dotnet",
-            "suppressTaskName": true,
             "args": [ "watch", "run" ]
-        },
-        {
-            "taskName": "dotnet run MyOtherApp",
-            "dependsOn": "dotnet build MyOtherApp",
-            "options": {
-                "env": {
-                    "ASPNETCORE_ENVIRONMENT": "Development"
-                },
-                "cwd": "${workspaceRoot}/MyOtherApp"
-            },
-            "command": "dotnet",
-            "suppressTaskName": true,
-            "args": [ "run" ]
         }
     ]
 }
