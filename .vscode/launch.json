@@ -21,7 +21,7 @@
             "pipeTransport":{
                 "pipeCwd": "${workspaceRoot}",
                 "pipeProgram": "azp",
-                "pipeArgs": [ "up" ],
+                "pipeArgs": [ "up", "--import", "stephpr/vsdbg:15.1.10502.1/vsdbg:/vsdbg" ],
                 "quoteArgs": false,
                 "debuggerPath": "/vsdbg/vsdbg"
             },
