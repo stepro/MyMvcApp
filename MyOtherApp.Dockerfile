@@ -1,9 +1,13 @@
 FROM microsoft/aspnetcore-build AS base
 WORKDIR /src
 COPY *.sln ./
-COPY MyOtherApp/*.csproj MyOtherApp/
-COPY SharedLib/*.csproj SharedLib/
-RUN dotnet restore MyOtherApp/MyOtherApp.csproj
+# COPY --glob **/*.*proj ./
+COPY MyMvcApp/MyMvcApp.csproj MyMvcApp/
+COPY MyMvcApp.Tests/MyMvcApp.Tests.csproj MyMvcApp.Tests/
+COPY MyOtherApp/MyOtherApp.csproj MyOtherApp/
+COPY SharedLib/SharedLib.csproj SharedLib/
+COPY WindowsFormsApplication1/WindowsFormsApplication1.csproj WindowsFormsApplication1/
+RUN dotnet restore
 
 FROM base AS develop
 EXPOSE 80
@@ -14,6 +18,7 @@ COPY MyOtherApp .
 RUN dotnet build
 
 FROM base AS publish
+# Issue: WORKDIR inherited from develop image
 WORKDIR /src
 COPY . .
 WORKDIR MyOtherApp

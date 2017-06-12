@@ -10,13 +10,13 @@ services:
     - "5000:80"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-    command: dotnet watch run
+    command: [ "dotnet", "watch", "run" ]
   my-mvc-app-tests:
     build:
       dockerfile: MyMvcApp.Tests.Dockerfile
       context: .
     image: my-mvc-app:tests
-    command: dotnet watch test
+    command: [ "dotnet", "watch", "test" ]
   my-other-app:
     # Depends on docker/compose issue #4790
     # build:
@@ -27,4 +27,4 @@ services:
     - "5001:80"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-    command: dotnet watch run
+    command:  [ "dotnet", "watch", "run" ]
