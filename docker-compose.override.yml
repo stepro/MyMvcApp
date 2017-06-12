@@ -1,11 +1,4 @@
 version: "2"
-volumes:
-  dcsync:
-    external:
-      name: mymvcapp_dcsync
-  vsdbg:
-    external:
-      name: mymvcapp_vsdbg
 services:
   my-mvc-app:
     # Depends on docker/compose issue #4790
@@ -13,41 +6,25 @@ services:
     #   dockerfile: MyMvcApp.Dockerfile
     #   target: develop
     image: my-mvc-app:develop
-    volumes:
-    - dcsync:/dcsync:ro
-    - vsdbg:/vsdbg:ro
-    - .:/.src
     ports:
     - "5000:80"
     environment:
-      DCSYNC_TARGET: /src
-    entrypoint: /dcsync/exec
-    command: dotnet run
+      ASPNETCORE_ENVIRONMENT: Development
+    command: dotnet watch run
   my-mvc-app-tests:
     build:
       dockerfile: MyMvcApp.Tests.Dockerfile
       context: .
-    image: my-mvc-app-tests
-    volumes:
-    - dcsync:/dcsync:ro
-    - .:/.src
-    environment:
-      DCSYNC_TARGET: /src
-    entrypoint: /dcsync/exec
-    command: dotnet test
+    image: my-mvc-app:tests
+    command: dotnet watch test
   my-other-app:
     # Depends on docker/compose issue #4790
     # build:
     #   dockerfile: MyOtherApp.Dockerfile
     #   target: develop
     image: my-other-app:develop
-    volumes:
-    - dcsync:/dcsync:ro
-    - vsdbg:/vsdbg:ro
-    - .:/.src
     ports:
     - "5001:80"
     environment:
-      DCSYNC_TARGET: /src
-    entrypoint: /dcsync/exec
-    command: dotnet run
+      ASPNETCORE_ENVIRONMENT: Development
+    command: dotnet watch run

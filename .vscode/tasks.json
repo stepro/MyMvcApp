@@ -3,184 +3,97 @@
     "tasks": [
         {
             "taskName": "dotnet restore",
-            "command": "dotnet",
             "suppressTaskName": true,
+            "command": "dotnet",
             "args": [ "restore" ]
         },
         {
             "taskName": "dotnet build MyMvcApp",
-            "dependsOn": "dotnet restore",
+            "suppressTaskName": true,
             "options": {
                 "cwd": "${workspaceRoot}/MyMvcApp"
             },
             "command": "dotnet",
-            "suppressTaskName": true,
             "args": [ "build" ]
         },
         {
             "taskName": "dotnet watch run MyMvcApp",
-            "dependsOn": "dotnet build MyMvcApp",
+            "suppressTaskName": true,
             "options": {
                 "env": {
-                    "ASPNETCORE_ENVIRONMENT": "Development"
+                    "ASPNETCORE_ENVIRONMENT": "Development",
+                    "ASPNETCORE_URLS": "http://+:5000"
                 },
                 "cwd": "${workspaceRoot}/MyMvcApp"
             },
             "command": "dotnet",
-            "suppressTaskName": true,
             "args": [ "watch", "run" ]
         },
         {
-            "taskName": "dotnet run MyMvcApp",
-            "dependsOn": "dotnet build MyMvcApp",
-            "options": {
-                "env": {
-                    "ASPNETCORE_ENVIRONMENT": "Development"
-                },
-                "cwd": "${workspaceRoot}/MyMvcApp"
-            },
-            "command": "dotnet",
-            "suppressTaskName": true,
-            "args": [ "run" ]
-        },
-        {
             "taskName": "dotnet watch test MyMvcApp.Tests",
-            "dependsOn": "dotnet restore",
+            "suppressTaskName": true,
             "options": {
                 "cwd": "${workspaceRoot}/MyMvcApp.Tests"
             },
             "command": "dotnet",
-            "suppressTaskName": true,
             "args": [ "watch", "test" ]
         },
         {
-            "taskName": "dotnet test MyMvcApp.Tests",
-            "dependsOn": "dotnet restore",
-            "options": {
-                "cwd": "${workspaceRoot}/MyMvcApp.Tests"
-            },
-            "command": "dotnet",
-            "suppressTaskName": true,
-            "args": [ "test" ]
-        },
-        {
             "taskName": "dotnet build MyOtherApp",
-            "dependsOn": "dotnet restore",
+            "suppressTaskName": true,
             "options": {
                 "cwd": "${workspaceRoot}/MyOtherApp"
             },
             "command": "dotnet",
-            "suppressTaskName": true,
             "args": [ "build" ]
         },
         {
             "taskName": "dotnet watch run MyOtherApp",
-            "dependsOn": "dotnet build MyOtherApp",
+            "suppressTaskName": true,
             "options": {
                 "env": {
-                    "ASPNETCORE_ENVIRONMENT": "Development"
+                    "ASPNETCORE_ENVIRONMENT": "Development",
+                    "ASPNETCORE_URLS": "http://+:5001"
                 },
                 "cwd": "${workspaceRoot}/MyOtherApp"
             },
             "command": "dotnet",
-            "suppressTaskName": true,
             "args": [ "watch", "run" ]
         },
         {
-            "taskName": "dotnet run MyOtherApp",
-            "dependsOn": "dotnet build MyOtherApp",
-            "options": {
-                "env": {
-                    "ASPNETCORE_ENVIRONMENT": "Development"
-                },
-                "cwd": "${workspaceRoot}/MyOtherApp"
-            },
-            "command": "dotnet",
+            "taskName": "docker-compose build my-mvc-app",
+            "dependsOn": "docker-compose down",
             "suppressTaskName": true,
-            "args": [ "run" ]
-        },
-        {
-            "taskName": "docker init",
-            "command": "docker-compose",
-            "suppressTaskName": true,
-            "args": [ "-f", "docker-init.yml", "up" ]
-        },
-        // This should call docker-compose build (docker/compose issue #4790)
-        {
-            "taskName": "docker build MyMvcApp",
-            "dependsOn": "docker down",
-            "command": "docker",
-            "suppressTaskName": true,
+            "command": "docker", // This should use docker-compose (docker/compose issue #4790)
             "args": [ "build", "-f", "MyMvcApp.Dockerfile", "--target", "develop", "-t", "my-mvc-app:develop", "." ]
         },
         {
-            "taskName": "docker run dotnet watch run MyMvcApp",
-            "dependsOn": "docker build MyMvcApp",
-            "command": "docker-compose",
+            "taskName": "docker-compose build my-other-app",
+            "dependsOn": "docker-compose build my-mvc-app",
             "suppressTaskName": true,
-            "args": [ "run", "--service-ports", "--rm", "my-mvc-app", "dotnet", "watch", "run" ],
-            "isBackground": true
-        },
-        {
-            "taskName": "docker run MyMvcApp",
-            "dependsOn": "docker build MyMvcApp",
-            "command": "docker-compose",
-            "suppressTaskName": true,
-            "args": [ "run", "--service-ports", "--rm", "my-mvc-app" ],
-            "isBackground": true
-        },
-        // This should call docker-compose build (docker/compose issue #4790)
-        {
-            "taskName": "docker build MyMvcApp.Tests",
-            "dependsOn": "docker down",
-            "command": "docker-compose",
-            "suppressTaskName": true,
-            "args": [ "build", "my-mvc-app-tests" ]
-        },
-        {
-            "taskName": "docker run dotnet watch test MyMvcApp.Tests",
-            "dependsOn": "docker build MyMvcApp.Tests",
-            "command": "docker-compose",
-            "suppressTaskName": true,
-            "args": [ "run", "--rm", "my-mvc-app-tests", "dotnet", "watch", "test" ],
-            "isBackground": true
-        },
-        {
-            "taskName": "docker run MyMvcApp.Tests",
-            "dependsOn": "docker build MyMvcApp.Tests",
-            "command": "docker-compose",
-            "suppressTaskName": true,
-            "args": [ "run", "--rm", "my-mvc-app-tests" ],
-            "isBackground": true
-        },
-        // This should call docker-compose build (docker/compose issue #4790)
-        {
-            "taskName": "docker build MyOtherApp",
-            "dependsOn": "docker down",
-            "command": "docker",
-            "suppressTaskName": true,
+            "command": "docker", // This should use docker-compose (docker/compose issue #4790)
             "args": [ "build", "-f", "MyOtherApp.Dockerfile", "--target", "develop", "-t", "my-other-app:develop", "." ]
         },
         {
-            "taskName": "docker run dotnet watch run MyOtherApp",
-            "dependsOn": "docker build MyOtherApp",
-            "command": "docker-compose",
+            "taskName": "docker-compose build",
+            "dependsOn": "docker-compose build my-other-app",
             "suppressTaskName": true,
-            "args": [ "run", "--service-ports", "--rm", "my-other-app", "dotnet", "watch", "run" ],
+            "command": "docker-compose",
+            "args": [ "build" ]
+        },
+        {
+            "taskName": "docker-compose up",
+            // This should not be needed (docker/compose issue #4790)
+            "dependsOn": "docker-compose build my-other-app",
+            "suppressTaskName": true,
+            "command": "docker-compose",
+            "args": [ "up", "--build" ],
             "isBackground": true
         },
         {
-            "taskName": "docker run MyOtherApp",
-            "dependsOn": "docker build MyOtherApp",
-            "command": "docker-compose",
+            "taskName": "docker-compose down",
             "suppressTaskName": true,
-            "args": [ "run", "--service-ports", "--rm", "my-other-app" ],
-            "isBackground": true
-        },
-        {
-            "taskName": "docker down",
             "command": "docker-compose",
-            "suppressTaskName": true,
             "args": [ "down" ]
         }
     ]

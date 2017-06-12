@@ -7,17 +7,18 @@
             "request": "launch",
             "preLaunchTask": "dotnet build MyMvcApp",
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://+:5000"
             },
             "cwd": "${workspaceRoot}/MyMvcApp",
             "program": "${workspaceRoot}/MyMvcApp/bin/Debug/netcoreapp1.1/MyMvcApp.dll",
             "args": []
         },
         {
-            "name": "MyMvcApp launch (Docker)",
+            "name": "MyMvcApp launch (docker-compose)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "docker build MyMvcApp",
+            "preLaunchTask": "docker-compose build my-mvc-app",
             "pipeTransport": {
                 "pipeProgram": "docker-compose",
                 "pipeCwd": "${workspaceRoot}",
@@ -38,17 +39,18 @@
             "request": "launch",
             "preLaunchTask": "dotnet build MyOtherApp",
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://+:5001"
             },
             "cwd": "${workspaceRoot}/MyOtherApp",
             "program": "${workspaceRoot}/MyOtherApp/bin/Debug/netcoreapp1.1/MyOtherApp.dll",
             "args": []
         },
         {
-            "name": "MyOtherApp launch (Docker)",
+            "name": "MyOtherApp launch (docker-compose)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "docker build MyOtherApp",
+            "preLaunchTask": "docker-compose build my-other-app",
             "pipeTransport": {
                 "pipeProgram": "docker-compose",
                 "pipeCwd": "${workspaceRoot}",

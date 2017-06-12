@@ -1,0 +1,35 @@
+version: "2"
+volumes:
+  docker-sync:
+services:
+  docker-sync:
+    image: stephpr/docker-sync
+    volumes:
+    - docker-sync:/sync
+  my-mvc-app:
+    depends_on:
+    - docker-sync
+    volumes:
+    - docker-sync:/.sync:ro
+    - .:/.src
+    environment:
+      DOCKER_SYNC_TARGET: /src
+    entrypoint: [ "/.sync/exec" ]
+  my-mvc-app-tests:
+    depends_on:
+    - docker-sync
+    volumes:
+    - docker-sync:/.sync:ro
+    - .:/.src
+    environment:
+      DOCKER_SYNC_TARGET: /src
+    entrypoint: [ "/.sync/exec" ]
+  my-other-app:
+    depends_on:
+    - docker-sync
+    volumes:
+    - docker-sync:/.sync:ro
+    - .:/.src
+    environment:
+      DOCKER_SYNC_TARGET: /src
+    entrypoint: [ "/.sync/exec" ]
