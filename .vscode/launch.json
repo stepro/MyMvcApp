@@ -15,6 +15,24 @@
             "args": []
         },
         {
+            "name": "MyMvcApp launch (Azure)",
+            "type": "coreclr",
+            "request": "launch",
+            "pipeTransport":{
+                "pipeCwd": "${workspaceRoot}",
+                "pipeProgram": "azp",
+                "pipeArgs": [ "up" ],
+                "quoteArgs": false,
+                "debuggerPath": "/vsdbg/vsdbg"
+            },
+            "cwd": "/src/MyMvcApp",
+            "program": "/src/MyMvcApp/bin/Debug/netcoreapp1.1/MyMvcApp.dll",
+            "args": [],
+            "sourceFileMap":{
+                "/src": "${workspaceRoot}"
+            }
+        },
+        {
             "name": "MyOtherApp launch",
             "type": "coreclr",
             "request": "launch",

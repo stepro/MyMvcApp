@@ -59,6 +59,13 @@
             },
             "command": "dotnet",
             "args": [ "watch", "run" ]
+        },
+        {
+            "taskName": "azp up",
+            "suppressTaskName": true,
+            "command": "azp",
+            "args": [ "up" ],
+            "isBackground": true
         }
     ]
 }
